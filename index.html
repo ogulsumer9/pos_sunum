@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Violin Eft-Pos Entegrasyon Sistemi | Mimari ve Teknik Sunum Dökümanı</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #eff6ff;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --emerald-600: #059669;
+      --emerald-50: #ecfdf5;
+      --amber-600: #d97706;
+      --amber-50: #fffbeb;
+      --indigo-600: #4f46e5;
+      --indigo-50: #eef2ff;
+      --purple-600: #9333ea;
+      --purple-50: #faf5ff;
+      --border-color: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--slate-800);
+      background-color: #f8fafc;
+      line-height: 1.6;
+      padding: 30px 20px;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #2563eb 100%);
+      color: #ffffff;
+      padding: 48px 40px;
+      position: relative;
+    }
+
+    .header .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      color: #93c5fd;
+      font-weight: 600;
+      font-size: 0.82rem;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .header p {
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      max-width: 820px;
+    }
+
+    .header-meta {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 18px;
+    }
+
+    .header-meta span strong {
+      color: #f1f5f9;
+    }
+
+    /* Content */
+    .content {
+      padding: 40px;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 2px solid var(--slate-100);
+      padding-bottom: 12px;
+    }
+
+    .section-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--slate-700);
+      font-size: 0.98rem;
+    }
+
+    /* Cards Grid */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card-primary {
+      border-top: 4px solid var(--primary);
+    }
+
+    .card-emerald {
+      border-top: 4px solid var(--emerald-600);
+    }
+
+    .card-amber {
+      border-top: 4px solid var(--amber-600);
+    }
+
+    .card-purple {
+      border-top: 4px solid var(--purple-600);
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--slate-900);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--slate-600);
+      margin-bottom: 14px;
+    }
+
+    /* Architectural Diagram Box */
+    .diagram-box {
+      background: var(--slate-900);
+      color: #f8fafc;
+      border-radius: var(--radius);
+      padding: 28px;
+      margin: 24px 0;
+      overflow-x: auto;
+    }
+
+    .diagram-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #94a3b8;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: nowrap;
+      min-width: 760px;
+    }
+
+    .arch-node {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 16px;
+      flex: 1;
+      text-align: center;
+    }
+
+    .arch-node.hub {
+      border-color: #3b82f6;
+      background: #172554;
+    }
+
+    .arch-node.controller {
+      border-color: #10b981;
+      background: #064e3b;
+    }
+
+    .arch-node.worker {
+      border-color: #f59e0b;
+      background: #451a03;
+    }
+
+    .arch-node.pos {
+      border-color: #a855f7;
+      background: #3b0764;
+    }
+
+    .arch-node h4 {
+      font-size: 0.95rem;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .arch-node p {
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      margin: 0;
+    }
+
+    .arch-arrow {
+      color: #64748b;
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    /* Table Styles */
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+      background: #ffffff;
+    }
+
+    th {
+      background: var(--slate-100);
+      color: var(--slate-800);
+      font-weight: 600;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--slate-700);
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--slate-50);
+    }
+
+    /* Pill Badges */
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tag-blue {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    .tag-green {
+      background: var(--emerald-50);
+      color: var(--emerald-600);
+    }
+
+    .tag-amber {
+      background: var(--amber-50);
+      color: var(--amber-600);
+    }
+
+    .tag-purple {
+      background: var(--purple-50);
+      color: var(--purple-600);
+    }
+
+    .tag-gray {
+      background: var(--slate-100);
+      color: var(--slate-700);
+    }
+
+    /* Code Snippet / Mono */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.85rem;
+      background: var(--slate-100);
+      color: #be185d;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .param-list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0;
+    }
+
+    .param-list li {
+      font-size: 0.88rem;
+      margin-bottom: 6px;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .param-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    /* Callout */
+    .callout {
+      border-left: 4px solid var(--primary);
+      background: var(--primary-light);
+      padding: 16px 20px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 20px 0;
+      font-size: 0.95rem;
+      color: var(--slate-800);
+    }
+
+    .callout-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .callout-amber {
+      border-left-color: var(--amber-600);
+      background: var(--amber-50);
+      color: #92400e;
+    }
+
+    .callout-amber .callout-title {
+      color: #b45309;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--slate-100);
+      border-top: 1px solid var(--border-color);
+      padding: 24px 40px;
+      font-size: 0.85rem;
+      color: var(--slate-600);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+
+      .container {
+        border: none;
+        box-shadow: none;
+      }
+
+      .card {
+        break-inside: avoid;
+      }
+
+      .table-container {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="badge">Sistem Mimarisi &amp; Entegrasyon Klavuzu</div>
+      <h1>Violin Eft-Pos Entegrasyon Sistemi</h1>
+      <p>Ödeme alma uygulaması ile Ingenico eft-pos cihazları arasında çoklu banka desteği, akıllı önceliklendirme, tam
+        işlem izolasyonu ve yüksek erişilebilirlik sağlayan ödeme orkestrasyonu mimarisi.</p>
+
+      <div class="header-meta">
+        <span><strong>Protokol:</strong> Ingenico IMP PRO TCP/JSON</span>
+        <span><strong>Hedef Donanım:</strong> Linux / Raspberry Pi</span>
+        <span><strong>Veritabanı:</strong> Merkezi Hub REST &amp; DB</span>
+        <span><strong>Doküman Versiyonu:</strong> 1.2 (Sunum Yayını)</span>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- BÖLÜM 1: MİMARİ VE NODE OLUŞTURMA -->
+      <section class="section">
+        <h2 class="section-title">
+          <span class="section-icon">🍓</span>
+          1. Violin Eft-Pos Mimarisi: Eft-Pos tanımlarına Göre Ayrı "Node" Oluşturma
+        </h2>
+        <p>
+          Sistemdeki en kritik mimari prensip <strong>"İşlem ve Donanım İzolasyonu" (Fault Isolation)</strong>
+          ilkesidir. Tek bir sunucu ya da monolitik servis üzerinden tüm POS terminallerini yönetmek yerine; her bir POS
+          cihazı için işletim sisteminde bağımsız ve izole bir <strong>Node (Java Süreci / Process)</strong>
+          oluşturulur.
+        </p>
+
+        <div class="diagram-box">
+          <div class="diagram-title">Donanım ve İşlem Akış Mimarisi</div>
+          <div class="arch-flow">
+            <div class="arch-node hub">
+              <h4>☁️ Pos Listesi</h4>
+              <p>POS Tanımları (ID, IP, Port, Lisans)</p>
+            </div>
+            <div class="arch-arrow">➔</div>
+            <div class="arch-node controller">
+              <h4>🧠 ControllerApp</h4>
+            </div>
+            <div class="arch-arrow">➔</div>
+            <div class="arch-node worker">
+              <h4>⚡ Her pos için ayrı bir uygulama oluşturulması</h4>
+              <p>instances/VLN_{id}<br>Ayrı JVM Süreçleri</p>
+            </div>
+            <div class="arch-arrow">➔</div>
+            <div class="arch-node pos">
+              <h4>📟 Fiziki POS Cihazları</h4>
+              <p>Ingenico IMP PRO (192.168.1.X)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card-primary">
+            <div class="card-title">
+              <span>Dinamik Node Yaşam Döngüsü</span>
+              <span class="tag tag-blue">Otomasyon</span>
+            </div>
+            <ul class="param-list">
+              <li><strong>Pos listesini servisten otomatik çekme:</strong> Uygulama açıldığında
+                <code>ControllerApp</code>
+                servisten güvenli şekilde pos listesini çeker.
+              </li>
+              <li><strong>İzole Klasör Hazırlığı:</strong> DB'den dönen her POS tanımı için ayrı bir çalışma dizini
+                tahsis edilir: <code>instances/VLN_{posId}/lib/</code></li>
+              <li><strong>Bağımsız JVM Süreci:</strong> Her POS cihazı için nohup ile arka planda bağımsız bir Java
+                instance'ı başlatılır:
+                <br><code>nohup java -DposIp={ip} -DposId={id} -DtcpPort={port} -jar violin-server.jar</code>
+              </li>
+              <li><strong>Ayrı Dinleme Portu:</strong> Her POS node'u kendisine atanan bağımsız bir TCP portu üzerinden
+                kasalardan bağlantı kabul eder.</li>
+            </ul>
+          </div>
+
+          <div class="card card-emerald">
+            <div class="card-title">
+              <span>Bu Mimarinin Katkıları</span>
+              <span class="tag tag-green">Güvenilirlik</span>
+            </div>
+            <ul class="param-list">
+              <li><strong>Sıfır Çapraz Etkilenme:</strong> 1 numaralı POS donanımsal olarak kilitlense, kablosu çıksa
+                veya elektriği kesilse dahi, diğer POS'lar ve kasalar asla etkilenmez, kesintisiz çalışır.</li>
+              <li><strong>Sıfır Yerinde Konfigürasyon:</strong> Mağazada hiçbir manuel ayar yapılmaz. Merkez DB'ye yeni
+                bir POS tanımlandığında RPi otomatik olarak yeni node'u ayağa kaldırır.</li>
+              <li><strong>Otomatik Senkronizasyon (Reconciliation):</strong> Controller her 60 dakikada bir (veya
+                kasadan tetik geldiğinde) çalışan süreçleri (<code>ps -ef</code>) DB ile karşılaştırır; silinen POS'ları
+                kapatıp temizler, yenileri anında başlatır.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- BÖLÜM 2: DEFAULT BANKA VE AKILLI YÖNLENDİRME -->
+      <section class="section">
+        <h2 class="section-title">
+          <span class="section-icon">🏦</span>
+          2. Banka Seçim Mekanizması &amp; "Default Banka" Özellikleri
+        </h2>
+        <p>
+          Fiziksel POS terminalleri tek bir bankaya mahkum değildir; içinde Garanti, İş Bankası, Akbank, Yapı Kredi,
+          Ziraat, Halkbank gibi çok sayıda banka uygulaması barındırır. Sistem kart takıldığında veya okutulduğunda en
+          avantajlı bankayı şu kurallarla otomatik seçer:
+        </p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Aşama</th>
+                <th>Çalışan Fonksiyon / Mantık</th>
+                <th>Açıklama</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Keşif</strong></td>
+                <td><code>Json_Imp_GetBankList</code></td>
+                <td>Node ayağa kalktığında terminale yüklü tüm banka kodlarını (<code>BankIdList</code>) ve cihazın
+                  fabrika tanımlı varsayılan bankasını (<code>DefaultBank</code>) hafızaya alır.</td>
+              </tr>
+              <tr>
+                <td><strong>2. BIN Analizi &amp; Öncelik</strong></td>
+                <td><code>getMostPriorBankInfo</code></td>
+                <td>Kart okutulduğunda POS terminali kart numarasının ilk 6 hanesini (BIN) analiz eder ve bankalara
+                  öncelik puanı (<code>BankPriority</code>) verir. En yüksek öncelikli banka tespit edilirse işlem o
+                  bankaya yönlendirilir.</td>
+              </tr>
+              <tr>
+                <td><strong>3. Default Banka Devreye Girişi</strong></td>
+                <td><code>ForceBankBkmID = DefaultBank</code></td>
+                <td>Öncelikler eşitse, kart yabancı bir kartsa veya BIN tablosunda eşleşme bulunamazsa; işlem riske
+                  atılmaz ve cihazın tanımlı <strong>Default Bankası</strong> üzerinden işleme devam edilir.</td>
+              </tr>
+              <tr>
+                <td><strong>4. Garanti &amp; Puan Kuralı</strong></td>
+                <td><code>forceGarantiIfCardIsGarantiToo</code></td>
+                <td>Garanti kartı algılandığında sistem işlemi Garanti BKM koduna kilitler. Kart Bonus ise puan
+                  sorgusunu Player motoruna bağlar (<code>POINT_FROM_PLAYER</code>); Shop&amp;Miles / Shop&amp;Fly gibi
+                  puansız kartlarda puan adımını otomatik kapatır (<code>WITHOUT_POINT</code>).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- BÖLÜM 3: ÇEKİM TÜRLERİ VE PARAMETRELER -->
+      <section class="section">
+        <h2 class="section-title">
+          <span class="section-icon">💳</span>
+          3. Çekim Türleri ve Parametre Akış Detayları
+        </h2>
+        <p>
+          Sistem; kasalardan gelen ödeme isteklerini 3 temel çekim modelinde yönetir. Her modelin güvenlik, zaman aşımı
+          ve veri parametreleri birbirinden farklıdır.
+        </p>
+
+        <div class="grid-3">
+          <div class="card card-primary">
+            <div class="card-title">
+              <span>🪙 Çipli Çekim (ICC)</span>
+              <span class="tag tag-blue">2 Adımlı</span>
+            </div>
+            <div class="card-desc">Kartın POS yuvasına fiziksel takılmasıyla gerçekleşen standart ödeme.</div>
+            <ul class="param-list">
+              <li><strong>Mod:</strong> Standart Akış</li>
+              <li><strong>Adım:</strong> Kasa Onaylı (Taksit &amp; Puan Seçimi)</li>
+              <li><strong>Timeout:</strong> ~90 Saniye</li>
+              <li><strong>Güvenlik:</strong> PIN / Şifre Girişi</li>
+            </ul>
+          </div>
+
+          <div class="card card-emerald">
+            <div class="card-title">
+              <span>📶 Temassız Çekim</span>
+              <span class="tag tag-green">Tek Adımlı</span>
+            </div>
+            <div class="card-desc"><strong>Sadece temassız kartın</strong> POS okuyucusuna yaklaştırılmasıyla
+              gerçekleşir.</div>
+            <ul class="param-list">
+              <li><strong>Mod:</strong> <code>DO_CONNECTIONLESS_SALE</code></li>
+              <li><strong>Adım:</strong> Hızlı Tek Adım (Ara onay yok)</li>
+              <li><strong>Timeout:</strong> ~45 Saniye</li>
+              <li><strong>Güvenlik:</strong> Kart temas limiti / Hızlı onay</li>
+            </ul>
+          </div>
+
+          <div class="card card-amber">
+            <div class="card-title">
+              <span>📱 QR &amp; FAST QR</span>
+              <span class="tag tag-blue">2 Adımlı</span>
+            </div>
+            <div class="card-desc">Mobil bankacılık veya TCMB FAST karekodu üzerinden ödeme.</div>
+            <ul class="param-list">
+              <li><strong>Mod:</strong> <code>DO_QR_TRANSACTION</code> (0x10)</li>
+              <li><strong>Adım:</strong> <strong>Çipli gibi 2 Adımlı</strong> (Banka/Taksit Ara Onayı ➔ QR Gösterimi
+                &amp; Mobil Onay)</li>
+              <li><strong>Timeout:</strong> 180 Saniye (3 Dakika)</li>
+              <li><strong>Özellik:</strong> PAN yerine Gönderen IBAN gelir</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ÖZEL İŞLEM KARTLARI: PUAN VE İPTAL/İADE -->
+        <div class="grid-2" style="margin-top: 16px;">
+          <div class="card card-purple">
+            <div class="card-title">
+              <span>🎁 Puan Çekim (Loyalty)</span>
+              <span class="tag tag-purple">Bonus / World / Maxi</span>
+            </div>
+            <div class="card-desc">Kartta biriken banka/üye işyeri sadakat puanlarını sorgulama ve ödemede puan harcama
+              akışı.</div>
+            <ul class="param-list">
+              <li><strong>Sorgulama Modu:</strong> <code>LOYALTY_QUERY</code> (Müşteri kartındaki puan bakiyesini
+                listeler)</li>
+              <li><strong>Puanla Ödeme:</strong> <code>SALE</code> mesajında puan tutarı belirtilerek doğrudan veya
+                kısmi harcanır</li>
+              <li><strong>Kısmi Destek:</strong> Tutarın bir kısmı puanla, kalanı kredi kartıyla çekilebilir
+                (<code>partialSupported</code>)</li>
+              <li><strong>Dönen Bilgi:</strong> Puan kodu, kampanya adı, min/max harcama tutarları
+                (<code>LoyaltyInfo[]</code>)</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-left: 4px solid #f43f5e; background: #fff1f2;">
+            <div class="card-title">
+              <span style="color:#9f1239;">🛑 İşlem İptali &amp; İade (Reverse / Void)</span>
+              <span class="tag" style="background:#ffe4e6; color:#be123c;">Kartsız İptal / FAST İade</span>
+            </div>
+            <div class="card-desc">Hatalı veya vazgeçilen çekimlerin gün sonu öncesinde banka hostu üzerinden iptal
+              edilmesi.</div>
+            <ul class="param-list">
+              <li><strong>Normal Kart (Çipli / Temassız):</strong> Standart <code>VOID (0x02)</code> ➔ Fiziksel kart
+                takılmasına gerek yoktur (<code>START_WITHOUT_CARD</code>)</li>
+              <li><strong>FAST QR Akıllı İade:</strong> FAST işlemleri klasik iptal edilemez (<code>E00D</code>); sürücü
+                otomatik <code>REFUND + VOID_WITH_LOOKUP_TUID</code> yapar</li>
+              <li><strong>Kayıt Eşleştirme:</strong> Sistem önceki işlemin tekil referansını
+                (<code>szTransUniqueID</code>) veritabanından bularak bankaya iletir</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout callout-amber">
+          <div class="callout-title">⚠️ İşlem Adımı (Step) Kuralı: Çipli ve QR 2 Adımlıdır, Temassız Tek Adımlıdır!
+          </div>
+          Sistem kaynak kodlarında (<code>ImpProWrapper.java</code>) tanımlandığı üzere:
+          <br>• <strong>Temassız Çekim:</strong> <code>interimUpdateRequired = false</code> ➔ <strong>Tek
+            adımlıdır</strong>, kasaya ara bilgi sormaz.
+          <br>• <strong>Çipli ve QR / FAST QR Çekimleri:</strong> <code>interimUpdateRequired = true</code> ➔ <strong>2
+            adımlıdır</strong>. POS ilk adımda banka ve işlem hazırlığını yaparak kasaya <code>CardInfoResult</code>
+          döner. Kasa banka, taksit ve tutar teyidini <code>PaymentUpdateMessage</code> ile verdikten sonra POS işlemi
+          bankaya/ekrana iletir.
+        </div>
+
+        <!-- DETAYLI PARAMETRE TABLOSU -->
+        <h3 style="font-size: 1.15rem; font-weight: 700; margin: 28px 0 14px 0; color: var(--slate-900);">
+          🔍 Çekim Türlerine Göre Gelen &amp; Gönderilen Parametre Matrisi
+        </h3>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 18%;">Aşama / Yön</th>
+                <th style="width: 27%;">🪙 Çipli Çekim (CHIP)</th>
+                <th style="width: 27%;">📶 Temassız Çekim (CONTACTLESS)</th>
+                <th style="width: 28%;">📱 QR &amp; FAST QR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Başlatma İsteği<br><span style="font-size:0.75rem; color:#64748b;">(Kasa ➔ POS
+                      Node)</span></strong></td>
+                <td>
+                  <code>PaymentMessage</code>
+                  <ul class="param-list">
+                    <li><code>paymentType: CHIP</code></li>
+                    <li><code>amount: BigDecimal</code> (Tutar)</li>
+                    <li><code>orderId: long</code> (Sipariş No)</li>
+                    <li><code>posId</code></li>
+
+                  </ul>
+                </td>
+                <td>
+                  <code>PaymentMessage</code>
+                  <ul class="param-list">
+                    <li><code>paymentType: CONTACTLESS</code></li>
+                    <li><code>amount: BigDecimal</code> (Tutar)</li>
+                    <li><code>orderId: long</code> (Sipariş No)</li>
+                    <li><code>posId</code></li>
+
+                  </ul>
+                </td>
+                <td>
+                  <code>PaymentMessage</code>
+                  <ul class="param-list">
+                    <li><code>paymentType: QR</code> veya <code>FAST_QR</code></li>
+                    <li><code>amount: BigDecimal</code> (Tutar)</li>
+                    <li><code>bankId: Short</code> (QR Banka Kodu)</li>
+                    <li><code>orderId, posId</code></li>
+
+                  </ul>
+                </td>
+              </tr>
+
+              <tr>
+                <td><strong>2. Nihai Sonuç &amp; Başarı Yanıtı<br><span style="font-size:0.75rem; color:#64748b;">(POS
+                      Node ➔ Kasa)</span></strong></td>
+                <td>
+                  <code>SuccessResult</code>
+                  <ul class="param-list">
+                    <li><code>cardInputType: 1 (Chip)</code></li>
+                    <li><code>pan: String</code> (Maskeli Kart)</li>
+                    <li><code>bankId: int</code> (BKM Kod)</li>
+                    <li><code>amount: BigDecimal</code></li>
+                    <li><code>authorizationNumber</code> (Auth)</li>
+                    <li><code>szRnn: String</code> (RRN)</li>
+                    <li><code>stan, batch: long</code></li>
+                    <li><code>installment: int</code></li>
+                  </ul>
+                </td>
+                <td>
+                  <code>SuccessResult</code>
+                  <ul class="param-list">
+                    <li><code>cardInputType: 4 (Connectionless)</code></li>
+                    <li><code>pan: String</code> (Maskeli Kart)</li>
+                    <li><code>bankId: int</code> (BKM Kod)</li>
+                    <li><code>amount: BigDecimal</code></li>
+                    <li><code>authorizationNumber</code> (Auth)</li>
+                    <li><code>szRnn: String</code> (RRN)</li>
+                    <li><code>stan, batch: long</code></li>
+                    <li><code>installment: 1</code> (Peşin)</li>
+                  </ul>
+                </td>
+                <td>
+                  <code>SuccessResult</code>
+                  <ul class="param-list">
+                    <li><code>cardInputType: 8 (QR)</code></li>
+                    <li><strong style="color:#be185d;">pan: Gönderen IBAN!</strong><br>(FAST'te
+                      <code>szQrFastIbanSender</code>)
+                    </li>
+                    <li><code>bankId: int</code> (BKM Kod)</li>
+                    <li><code>amount: BigDecimal</code></li>
+                    <li><code>authorizationNumber, szRnn</code></li>
+                    <li><code>qr_fast_ref_no</code> (FAST Ref)</li>
+                    <li><code>qr_fast_msg_auth_no</code></li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ÖZEL İŞLEMLER PARAMETRE TABLOSU: PUAN VE İPTAL/İADE -->
+        <h3 style="font-size: 1.15rem; font-weight: 700; margin: 32px 0 14px 0; color: var(--slate-900);">
+          🔍 Özel İşlem Parametre Matrisi: 🎁 Puan Çekim (Loyalty) &amp; 🛑 İptal / İade (Reverse)
+        </h3>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 20%;">Aşama / Yön</th>
+                <th style="width: 40%;">🎁 Puan Çekim (Puan Sorgulama &amp; Puanlı Satış)</th>
+                <th style="width: 40%;">🛑 İşlem İptali &amp; İade (Reverse / Void / FAST Refund)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Başlatma İsteği<br><span style="font-size:0.75rem; color:#64748b;">(Kasa ➔ POS
+                      Node)</span></strong></td>
+                <td>
+                  <strong>(A) Puan Bakiyesi Sorgulama:</strong> <code>LoyaltyQueryMessage</code>
+                  <ul class="param-list">
+                    <li><code>posId, orderId: long</code></li>
+                    <li><code>terminalId, </code></li>
+                  </ul>
+                  <strong>(B) Puanlı Satış Başlatma:</strong> <code>PaymentMessage</code>
+                  <ul class="param-list">
+                    <li><code>amount: BigDecimal</code> (Toplam Satış Tutarı)</li>
+                    <li><code>loyalty: BigDecimal</code> (Harcanacak Puan)</li>
+                    <li><code>bankId: Short</code> (Zorunlu Puan Banka Kodu)</li>
+                  </ul>
+                </td>
+                <td>
+                  <code>ReversePaymentMessage</code>
+                  <ul class="param-list">
+                    <li><code>posId: int</code> (Hedef POS Terminali)</li>
+                    <li><code>orderId: long</code> (Sipariş Numarası)</li>
+                    <li><strong style="color:#be123c;">trxId: String</strong> (İptal Edilecek Orijinal İşlemin Tekil
+                      ID'si / UUID)</li>
+                    <li><code>terminalId, </code></li>
+                  </ul>
+                </td>
+              </tr>
+
+              <tr>
+                <td><strong>2. Nihai Sonuç &amp; Başarı Yanıtı<br><span style="font-size:0.75rem; color:#64748b;">(POS
+                      Node ➔ Kasa)</span></strong></td>
+                <td>
+                  <code>SuccessResult</code>
+                  <ul class="param-list">
+                    <li><strong style="color:#7e22ce;">authorizatedLoyalty: BigDecimal</strong> (Düşülen Puan Tutarı)
+                    </li>
+                    <li><code>amount: BigDecimal</code> (Karttan Çekilen Kalan Tutar)</li>
+                    <li><code>authorizationNumber: String</code> (Onay Kodu)</li>
+                    <li><code>szRnn: String</code> (RRN Referans No)</li>
+                    <li><code>pan: String</code> (Maskeli Kart Numarası)</li>
+                    <li><code>stan, batch: long</code></li>
+                  </ul>
+                </td>
+                <td>
+                  <code>ReversePaymentResult</code>
+                  <ul class="param-list">
+                    <li><code>posId: int</code></li>
+                    <li><code>trxId: String</code> (İptal Edilen İşlem Referansı)</li>
+                    <li><code>result: TransactionReversalResult</code> (<code>SUCCESS / DECLINED / TIMEOUT</code>)</li>
+                    <li><code>message: String</code> (Banka Yanıt Açıklaması: "İPTAL EDİLDİ", "İŞLEM BULUNAMADI" vb.)
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- BÖLÜM 4: GÜVENLİK VE KESİNTİ KORUMASI -->
+      <section class="section">
+        <h2 class="section-title">
+          <span class="section-icon">🛡️</span>
+          4. Kesinti Koruması &amp; İki Kademeli Güvenlik
+        </h2>
+        <p>
+          Ödeme sistemlerinde en tehlikeli senaryo müşterinin kartından para çekilmesine rağmen kasanın fiş kesememesi
+          ("Askıda Kalan İşlem") durumudur. Sistem bunu şu 3 mekanizmayla %100 engeller:
+        </p>
+
+        <div class="grid-2">
+          <div class="card card-purple">
+            <div class="card-title">
+              <span>Son İşlem Sorgusu (Lookup)</span>
+              <span class="tag tag-purple">Slip Kurtarma</span>
+            </div>
+            <p class="card-desc">
+              Kasa ile POS arasındaki ağ bağlantısı işlem esnasında kopsa dahi; sürücü bağlantı tekrar geldiğinde POS'a
+              <code>Json_Imp_LastTransactionLookup</code> komutunu gönderir.
+            </p>
+            <ul class="param-list">
+              <li>Bankadan provizyon alınmışsa işlem DB'de <code>APPROVED</code> olarak güncellenir ve kasa ekranına
+                başarı yanıtı döner. Mükerrer çekim engellenir.</li>
+              <li>Banka reddetmişse yerel kayıt <code>DECLINED</code> yapılır.</li>
+            </ul>
+          </div>
+
+          <div class="card card-primary">
+            <div class="card-title">
+              <span>FAST QR Hibrit İade Koruması</span>
+              <span class="tag tag-blue">Akıllı İade</span>
+            </div>
+            <p class="card-desc">
+              FAST ödemeleri klasik kredi kartı gibi doğrudan <code>VOID (İptal)</code> edilemez. Banka hostu
+              <code>E00D - FAST İŞLEM! FAST İADE YAPINIZ</code> cevabı döner.
+            </p>
+            <ul class="param-list">
+              <li>Violin sürücüsü bu hatayı yakalar ve işlemi otomatik olarak
+                <code>REFUND + VOID_WITH_LOOKUP_TUID</code> protokolüne dönüştürür.
+              </li>
+              <li>POS cihazı önceki FAST referansını hafızasından bulup iadeyi FAST altyapısı üzerinden başarıyla
+                sonlandırır.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- BÖLÜM 5: DONANIM VE AĞ HABERLEŞME MİMARİSİ & CANLI SİMÜLATÖR -->
+      <section class="section" style="margin-bottom: 0;">
+        <h2 class="section-title">
+          <span class="section-icon">🖥️</span>
+          5. Donanım ve Ağ Haberleşme Mimarisi &amp; Canlı Simülatör
+        </h2>
+        <p>
+          Aşağıdaki mimari şema; Kasa (ECR), Raspberry Pi ControllerApp, izole POS Node süreçleri (TransactionApp),
+          yerel SQLite veritabanı, Ingenico POS terminalleri ve Merkezi Hub API arasındaki tüm <strong>tek taraflı
+            (➔)</strong> ve <strong>çift taraflı (⇄)</strong> haberleşme hatlarını ve veri akış yönlerini
+          göstermektedir.
+        </p>
+
+        <!-- Profesyonel Vektör Sistem ve Donanım Mimarisi Diyagramı -->
+        <div
+          style="margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); background: #0b1120;">
+          <svg viewBox="0 0 1140 820" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg"
+            style="display: block; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+            <defs>
+              <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
+                <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.45" />
+              </filter>
+              <!-- Arrow Markers -->
+              <marker id="arr-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6"
+                orient="auto-start-reverse">
+                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8" />
+              </marker>
+              <marker id="arr-amber" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6"
+                orient="auto-start-reverse">
+                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#f59e0b" />
+              </marker>
+              <marker id="arr-green" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6"
+                orient="auto-start-reverse">
+                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#10b981" />
+              </marker>
+              <marker id="arr-purple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6"
+                orient="auto-start-reverse">
+                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c084fc" />
+              </marker>
+
+              <!-- Gradients -->
+              <linearGradient id="g-hub" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1e3a8a" />
+                <stop offset="100%" stop-color="#0f172a" />
+              </linearGradient>
+              <linearGradient id="g-ctrl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#064e3b" />
+                <stop offset="100%" stop-color="#022c22" />
+              </linearGradient>
+              <linearGradient id="g-node" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1e1b4b" />
+                <stop offset="100%" stop-color="#0f172a" />
+              </linearGradient>
+              <linearGradient id="g-ecr" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0c4a6e" />
+                <stop offset="100%" stop-color="#082f49" />
+              </linearGradient>
+              <linearGradient id="g-pos" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#451a03" />
+                <stop offset="100%" stop-color="#270e02" />
+              </linearGradient>
+              <linearGradient id="g-db" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3b0764" />
+                <stop offset="100%" stop-color="#1e053a" />
+              </linearGradient>
+            </defs>
+
+            <!-- Arka Plan Grid / Canvas -->
+            <rect width="1140" height="820" fill="#090d16" rx="12" />
+
+            <!-- ================= ÜST LEJANT: İLETİŞİM YÖNLERİ ================= -->
+            <rect x="25" y="15" width="1090" height="42" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.2" />
+            <text x="45" y="41" fill="#cbd5e1" font-size="11.5" font-weight="700">İLETİŞİM AKIŞ LEJANTI:</text>
+
+            <!-- Lejant 1: Çift Yönlü Ağ -->
+            <line x1="195" y1="36" x2="230" y2="36" stroke="#38bdf8" stroke-width="2.5" marker-start="url(#arr-blue)"
+              marker-end="url(#arr-blue)" />
+            <text x="240" y="40" fill="#93c5fd" font-size="11" font-weight="600">⇄ Çift Taraflı Ağ İletişimi (İstek /
+              Yanıt - TCP &amp; HTTPS)</text>
+
+            <!-- Lejant 2: Tek Yönlü OS Komutu -->
+            <line x1="570" y1="36" x2="605" y2="36" stroke="#10b981" stroke-width="2" stroke-dasharray="4 3"
+              marker-end="url(#arr-green)" />
+            <text x="615" y="40" fill="#a7f3d0" font-size="11" font-weight="600">➔ Tek Taraflı Süreç Yönetimi (OS
+              Daemon: nohup java / kill)</text>
+
+            <!-- Lejant 3: Tek Yönlü DB Yazma -->
+            <line x1="940" y1="36" x2="975" y2="36" stroke="#c084fc" stroke-width="2" stroke-dasharray="3 3"
+              marker-end="url(#arr-purple)" />
+            <text x="985" y="40" fill="#e9d5ff" font-size="11" font-weight="600">➔ Tek Taraflı DB Yazma (JDBC)</text>
+
+
+            <!-- ================= 1. MERKEZ YÖNETİM (HUB MIDDLEWARE) ================= -->
+            <g id="hub-middleware" filter="url(#shadow)">
+              <rect x="380" y="75" width="380" height="84" rx="10" fill="url(#g-hub)" stroke="#3b82f6"
+                stroke-width="1.8" />
+              <text x="570" y="98" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="700"
+                letter-spacing="1">☁️ BULUT / MERKEZ YÖNETİM &amp; VERİTABANI</text>
+              <text x="570" y="121" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="800">Hub Middleware
+                (HTTPS / REST API)</text>
+              <text x="570" y="141" text-anchor="middle" fill="#cbd5e1" font-size="11">Cihaz MAC Adresi Doğrulama • POS
+                Konfigürasyon Havuzu • Lisans Yönetimi</text>
+            </g>
+
+            <!-- Hub <-> Controller Bağlantı Oku: ÇİFT TARAFLI (REQUEST - RESPONSE) -->
+            <line x1="570" y1="159" x2="570" y2="218" stroke="#38bdf8" stroke-width="2.5" marker-start="url(#arr-blue)"
+              marker-end="url(#arr-blue)" />
+            <rect x="420" y="176" width="300" height="25" rx="12" fill="#1e293b" stroke="#3b82f6" stroke-width="1.2" />
+            <text x="570" y="193" text-anchor="middle" fill="#93c5fd" font-size="10.5" font-weight="700">⇄ ÇİFT TARAFLI:
+              HTTPS POST (getPosList / pushAllData)</text>
+
+
+            <!-- ================= 2. RASPBERRY PI 4 ÇEVRE ALANI ================= -->
+            <rect x="275" y="220" width="590" height="575" rx="14" fill="#0f172a" stroke="#10b981" stroke-width="1.8"
+              filter="url(#shadow)" />
+            <!-- RPi Başlık Rozeti -->
+            <rect x="295" y="208" width="340" height="24" rx="6" fill="#064e3b" stroke="#10b981" stroke-width="1.2" />
+            <text x="465" y="224" text-anchor="middle" fill="#a7f3d0" font-size="11" font-weight="800"
+              letter-spacing="0.5">🍓 RASPBERRY PI 4 (MAĞAZA İÇİ KASA SUNUCUSU)</text>
+
+            <!-- ControllerApp -->
+            <g id="controller-app">
+              <rect x="300" y="242" width="540" height="76" rx="10" fill="url(#g-ctrl)" stroke="#34d399"
+                stroke-width="1.5" />
+              <text x="318" y="267" fill="#6ee7b7" font-size="14" font-weight="800">🧠 ControllerApp (Master Yönetici
+                Süreç - Daemon)</text>
+              <text x="318" y="287" fill="#e2e8f0" font-size="11.5">• Cihazın MAC adresini okur • Hub API'ye istek atıp
+                atanmış POS listesini çeker</text>
+              <text x="318" y="305" fill="#a7f3d0" font-size="11">• Her POS için izole nohup java alt süreci başlatır •
+                ps -ef ile 60 dk'da bir sağlık kontrolü yapar</text>
+            </g>
+
+            <!-- Controller -> İzole Node Alanı Bağlantısı: TEK TARAFLI OS KOMUTU -->
+            <line x1="570" y1="318" x2="570" y2="348" stroke="#10b981" stroke-width="2.2" stroke-dasharray="4 3"
+              marker-end="url(#arr-green)" />
+            <rect x="425" y="324" width="290" height="20" rx="10" fill="#064e3b" stroke="#10b981" stroke-width="1" />
+            <text x="570" y="337" text-anchor="middle" fill="#a7f3d0" font-size="9.5" font-weight="700">➔ TEK TARAFLI:
+              OS Process Spawn (nohup java / kill)</text>
+
+            <!-- İzole Node Alanı (Multi-Process Container) -->
+            <rect x="300" y="348" width="540" height="295" rx="10" fill="rgba(15, 23, 42, 0.75)" stroke="#475569"
+              stroke-width="1.5" stroke-dasharray="4 4" />
+            <rect x="320" y="340" width="460" height="18" rx="4" fill="#1e293b" stroke="#64748b" />
+            <text x="550" y="353" text-anchor="middle" fill="#cbd5e1" font-size="9.5" font-weight="700"
+              letter-spacing="0.5">⚡ İZOLE NODE ALANLARI (MULTI-PROCESS MİMARİSİ - BİRBİRİNİ ASLA ETKİLEMEZ)</text>
+
+            <!-- Node 1 (TransactionApp) -->
+            <g id="node-1">
+              <rect x="318" y="370" width="504" height="115" rx="8" fill="url(#g-node)" stroke="#6366f1"
+                stroke-width="1.6" filter="url(#shadow)" />
+              <text x="335" y="396" fill="#c7d2fe" font-size="14" font-weight="800">⚡ Node 1 (TransactionApp
+                Süreci)</text>
+              <rect x="695" y="382" width="115" height="20" rx="4" fill="#312e81" stroke="#818cf8" />
+              <text x="752" y="396" text-anchor="middle" fill="#fde047" font-size="10.5" font-weight="700">PORT:
+                9001</text>
+
+              <text x="335" y="420" fill="#818cf8" font-size="11" font-family="monospace">📁 Çalışma Dizini:
+                /instances/VLN_101/lib/ | POS ID: 101</text>
+              <text x="335" y="442" fill="#e2e8f0" font-size="11">• Bağımsız JVM • Kendi lib/ klasörü ve log alanı • POS
+                101 ile Kasa 1 arasındaki işlemleri yönetir</text>
+              <text x="335" y="462" fill="#a5b4fc" font-size="10.5">• POS 2 kilitlense bile Node 1 çalışmaya devam eder
+                (Fault Isolation)</text>
+            </g>
+
+            <!-- Node 2 (TransactionApp) -->
+            <g id="node-2">
+              <rect x="318" y="505" width="504" height="115" rx="8" fill="url(#g-node)" stroke="#6366f1"
+                stroke-width="1.6" filter="url(#shadow)" />
+              <text x="335" y="531" fill="#c7d2fe" font-size="14" font-weight="800">⚡ Node 2 (TransactionApp
+                Süreci)</text>
+              <rect x="695" y="517" width="115" height="20" rx="4" fill="#312e81" stroke="#818cf8" />
+              <text x="752" y="531" text-anchor="middle" fill="#fde047" font-size="10.5" font-weight="700">PORT:
+                9002</text>
+
+              <text x="335" y="555" fill="#818cf8" font-size="11" font-family="monospace">📁 Çalışma Dizini:
+                /instances/VLN_102/lib/ | POS ID: 102</text>
+              <text x="335" y="577" fill="#e2e8f0" font-size="11">• Bağımsız JVM • Kendi lib/ klasörü ve log alanı • POS
+                102 ile Kasa 2 arasındaki işlemleri yönetir</text>
+              <text x="335" y="597" fill="#a5b4fc" font-size="10.5">• POS 1 kilitlense bile Node 2 çalışmaya devam eder
+                (Fault Isolation)</text>
+            </g>
+
+            <!-- Node -> SQLite Bağlantı Hatları: TEK TARAFLI LOG YAZMA -->
+            <line x1="450" y1="643" x2="450" y2="675" stroke="#c084fc" stroke-width="2" stroke-dasharray="3 3"
+              marker-end="url(#arr-purple)" />
+            <line x1="690" y1="643" x2="690" y2="675" stroke="#c084fc" stroke-width="2" stroke-dasharray="3 3"
+              marker-end="url(#arr-purple)" />
+
+            <!-- Yerel SQLite Veritabanı -->
+            <g id="sqlite-db">
+              <rect x="350" y="675" width="440" height="95" rx="10" fill="url(#g-db)" stroke="#a855f7"
+                stroke-width="1.6" filter="url(#shadow)" />
+              <text x="570" y="700" text-anchor="middle" fill="#f3e8ff" font-size="13.5" font-weight="800">💾 Yerel
+                SQLite Veritabanı (İşlem Logları &amp; Hata İzolasyonu)</text>
+              <text x="570" y="722" text-anchor="middle" fill="#e9d5ff" font-size="11">➔ TEK TARAFLI ANLIK YAZMA:
+                insertTransaction / closeTransaction(APPROVED)</text>
+              <text x="570" y="741" text-anchor="middle" fill="#d8b4fe" font-size="11">• 30 Günlük Geçmiş Kaydı • Ağ
+                koptuğunda LastTransactionLookup ile mükerrer çekim engelleme</text>
+              <text x="570" y="759" text-anchor="middle" fill="#c084fc" font-size="10.5">JDBC Bağlantısı • Hikari
+                Connection Pool • PosTransactionDbService</text>
+            </g>
+
+
+            <!-- ================= 3. SOL KOLON: KASA TERMİNALLERİ (ECR) ================= -->
+            <rect x="25" y="325" width="200" height="325" rx="12" fill="#0b1329" stroke="#0284c7" stroke-width="1.5"
+              filter="url(#shadow)" />
+            <rect x="40" y="313" width="170" height="24" rx="6" fill="#0369a1" stroke="#38bdf8" />
+            <text x="125" y="329" text-anchor="middle" fill="#e0f2fe" font-size="11" font-weight="800">🖥️ KASA
+              TERMİNALLERİ (ECR)</text>
+
+            <!-- Kasa 1 -->
+            <g id="kasa-1">
+              <rect x="40" y="370" width="170" height="115" rx="8" fill="url(#g-ecr)" stroke="#38bdf8"
+                stroke-width="1.5" />
+              <text x="125" y="398" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="800">🖥️ Kasa
+                1</text>
+              <text x="125" y="420" text-anchor="middle" fill="#bae6fd" font-size="11">Kasa Satış Yazılımı</text>
+              <text x="125" y="440" text-anchor="middle" fill="#7dd3fc" font-size="11" font-family="monospace">IP:
+                192.168.1.11</text>
+              <rect x="53" y="452" width="144" height="20" rx="4" fill="#0369a1" />
+              <text x="125" y="466" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="700">Hedef Port:
+                9001 ⇄</text>
+            </g>
+
+            <!-- Kasa 2 -->
+            <g id="kasa-2">
+              <rect x="40" y="505" width="170" height="115" rx="8" fill="url(#g-ecr)" stroke="#38bdf8"
+                stroke-width="1.5" />
+              <text x="125" y="533" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="800">🖥️ Kasa
+                2</text>
+              <text x="125" y="555" text-anchor="middle" fill="#bae6fd" font-size="11">Kasa Satış Yazılımı</text>
+              <text x="125" y="575" text-anchor="middle" fill="#7dd3fc" font-size="11" font-family="monospace">IP:
+                192.168.1.12</text>
+              <rect x="53" y="587" width="144" height="20" rx="4" fill="#0369a1" />
+              <text x="125" y="601" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="700">Hedef Port:
+                9002 ⇄</text>
+            </g>
+
+
+            <!-- ================= 4. SAĞ KOLON: FİZİKİ POS TERMİNALLERİ ================= -->
+            <rect x="915" y="325" width="200" height="325" rx="12" fill="#0b1329" stroke="#d97706" stroke-width="1.5"
+              filter="url(#shadow)" />
+            <rect x="930" y="313" width="170" height="24" rx="6" fill="#b45309" stroke="#f59e0b" />
+            <text x="1015" y="329" text-anchor="middle" fill="#fef3c7" font-size="11" font-weight="800">📟 FİZİKİ POS
+              TERMİNALLERİ</text>
+
+            <!-- POS #1 -->
+            <g id="pos-1">
+              <rect x="930" y="370" width="170" height="115" rx="8" fill="url(#g-pos)" stroke="#f59e0b"
+                stroke-width="1.5" />
+              <text x="1015" y="398" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="800">📟 POS Cihazı
+                #1</text>
+              <text x="1015" y="420" text-anchor="middle" fill="#fde68a" font-size="11">Ingenico Axium IMP PRO</text>
+              <text x="1015" y="440" text-anchor="middle" fill="#fcd34d" font-size="11" font-family="monospace">IP:
+                192.168.1.101</text>
+              <rect x="943" y="452" width="144" height="20" rx="4" fill="#78350f" />
+              <text x="1015" y="466" text-anchor="middle" fill="#fef08a" font-size="10" font-weight="700">TCP: 20000
+                ⇄</text>
+            </g>
+
+            <!-- POS #2 -->
+            <g id="pos-2">
+              <rect x="930" y="505" width="170" height="115" rx="8" fill="url(#g-pos)" stroke="#f59e0b"
+                stroke-width="1.5" />
+              <text x="1015" y="533" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="800">📟 POS Cihazı
+                #2</text>
+              <text x="1015" y="555" text-anchor="middle" fill="#fde68a" font-size="11">Ingenico Axium IMP PRO</text>
+              <text x="1015" y="575" text-anchor="middle" fill="#fcd34d" font-size="11" font-family="monospace">IP:
+                192.168.1.102</text>
+              <rect x="943" y="587" width="144" height="20" rx="4" fill="#78350f" />
+              <text x="1015" y="601" text-anchor="middle" fill="#fef08a" font-size="10" font-weight="700">TCP: 20000
+                ⇄</text>
+            </g>
+
+
+            <!-- ================= 5. YATAY VE PARALEL BAĞLANTI HATLARI: ÇİFT TARAFLI (⇄) ================= -->
+
+            <!-- Kasa 1 <-> Node 1 (ÇİFT TARAFLI) -->
+            <line x1="210" y1="427" x2="318" y2="427" stroke="#38bdf8" stroke-width="2.8" marker-start="url(#arr-blue)"
+              marker-end="url(#arr-blue)" />
+            <rect x="220" y="411" width="88" height="32" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1.2" />
+            <text x="264" y="424" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="800">⇄ ÇİFT
+              YÖNLÜ</text>
+            <text x="264" y="437" text-anchor="middle" fill="#bae6fd" font-size="8.5">TCP: 9001 (JSON)</text>
+
+            <!-- Node 1 <-> POS #1 (ÇİFT TARAFLI) -->
+            <line x1="822" y1="427" x2="930" y2="427" stroke="#f59e0b" stroke-width="2.8" marker-start="url(#arr-amber)"
+              marker-end="url(#arr-amber)" />
+            <rect x="832" y="411" width="88" height="32" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1.2" />
+            <text x="876" y="424" text-anchor="middle" fill="#f59e0b" font-size="9" font-weight="800">⇄ ÇİFT
+              YÖNLÜ</text>
+            <text x="876" y="437" text-anchor="middle" fill="#fde68a" font-size="8.5">IMP PRO TCP/JSON</text>
+
+            <!-- Kasa 2 <-> Node 2 (ÇİFT TARAFLI) -->
+            <line x1="210" y1="562" x2="318" y2="562" stroke="#38bdf8" stroke-width="2.8" marker-start="url(#arr-blue)"
+              marker-end="url(#arr-blue)" />
+            <rect x="220" y="546" width="88" height="32" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1.2" />
+            <text x="264" y="559" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="800">⇄ ÇİFT
+              YÖNLÜ</text>
+            <text x="264" y="572" text-anchor="middle" fill="#bae6fd" font-size="8.5">TCP: 9002 (JSON)</text>
+
+            <!-- Node 2 <-> POS #2 (ÇİFT TARAFLI) -->
+            <line x1="822" y1="562" x2="930" y2="562" stroke="#f59e0b" stroke-width="2.8" marker-start="url(#arr-amber)"
+              marker-end="url(#arr-amber)" />
+            <rect x="832" y="546" width="88" height="32" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1.2" />
+            <text x="876" y="559" text-anchor="middle" fill="#f59e0b" font-size="9" font-weight="800">⇄ ÇİFT
+              YÖNLÜ</text>
+            <text x="876" y="572" text-anchor="middle" fill="#fde68a" font-size="8.5">IMP PRO TCP/JSON</text>
+          </svg>
+
+          <div
+            style="padding: 12px 20px; background: rgba(15, 23, 42, 0.98); color: #94a3b8; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <span>📐 <strong>Mimari Şema:</strong> Kasa (ECR) ➔ İzole Node (Process) ➔ Ingenico POS Uçtan Uca Haberleşme
+              Mimarisi</span>
+            <span style="color: #10b981; font-weight: 700;">✔ ÇİFT YÖNLÜ VE TEK YÖNLÜ HATLARI GÖSTEREN TAM AKIŞ</span>
+          </div>
+        </div>
+
+        <!-- ================= 10 ADIMLI UÇTAN UCA İŞLEM SIRALAMA ŞEMASI ================= -->
+
+    </div>
+
+    <!-- Canlı İnteraktif Simülasyon Konsolu -->
+
+  </div>
+  </section>
+
+  <script>
+    function runSimulation(type) {
+      const title = document.getElementById('sim-term-title');
+      const amount = document.getElementById('sim-term-amount');
+      const detail = document.getElementById('sim-term-detail');
+      const status = document.getElementById('sim-status-badge');
+      const mode = document.getElementById('sim-term-mode');
+      const consoleBox = document.getElementById('sim-log-console');
+
+      function log(msg, color = '#f8fafc') {
+        const time = new Date().toTimeString().split(' ')[0] + '.' + Math.floor(Math.random() * 900 + 100);
+        const line = document.createElement('div');
+        line.style.color = color;
+        line.innerHTML = '[' + time + '] ' + msg;
+        consoleBox.appendChild(line);
+        consoleBox.scrollTop = consoleBox.scrollHeight;
+      }
+
+      if (type === 'CHIP') {
+        status.style.color = '#f59e0b';
+        status.innerText = 'İŞLEMDE (2 ADIMLI)';
+        title.innerText = 'KART TAKILDI - ŞİFRE GİRİNİZ';
+        amount.innerText = '₺250.00';
+        detail.innerText = 'Banka: Garanti BBVA (Bonus) | Taksit: 3';
+        mode.innerText = 'MOD: ÇİPLİ (ICC 2-STEP)';
+
+        log('➔ Kasa: PaymentMessage gönderildi (paymentType: CHIP, amount: 250.00, orderId: 88412)', '#38bdf8');
+        setTimeout(() => {
+          log(' Node ➔ Kasa: CardInfoResult (pan: 540061******1234, bankId: 62 Garanti, cardType: Bonus)', '#fbbf24');
+          log('➔ Kasa ➔ Node: PaymentUpdateMessage (installment: 3, bankId: 62 teyit edildi)', '#38bdf8');
+        }, 600);
+        setTimeout(() => {
+          status.style.color = '#10b981';
+          status.innerText = 'ONAYLANDI';
+          title.innerText = 'PROVİZYON ALINDI - SLİP BASILIYOR';
+          detail.innerText = 'Auth: 094821 | RRN: 42918400192 | BKM: 62';
+          log(' POS ➔ Kasa: SuccessResult (cardInputType: 1, stan: 1042, auth: 094821, APPROVED)', '#34d399');
+          log('💾 SQLite: Transaction tablosuna APPROVED statüsüyle mühürlendi.', '#a78bfa');
+        }, 1400);
+
+      } else if (type === 'CONTACTLESS') {
+        status.style.color = '#10b981';
+        status.innerText = 'TEK ADIMLI ONAY';
+        title.innerText = 'KART OKUTULDU - LÜTFEN BEKLEYİNİZ';
+        amount.innerText = '₺120.00';
+        detail.innerText = 'Temassız Kart Okundu (Ara Adım Yok)';
+        mode.innerText = 'MOD: TEMASSIZ (NFC 1-STEP)';
+
+        log('➔ Kasa: PaymentMessage (paymentType: CONTACTLESS, amount: 120.00, interimUpdateRequired=false)', '#38bdf8');
+        setTimeout(() => {
+          title.innerText = 'ÖDEME BAŞARILI';
+          detail.innerText = 'Auth: 819201 | RRN: 42918400193 | Kart: Temassız';
+          log(' POS ➔ Kasa: SuccessResult (cardInputType: 4, pan: 454360******8891, APPROVED)', '#34d399');
+          log('💾 SQLite: İşlem saniyeler içinde doğrudan onaylandı.', '#a78bfa');
+        }, 800);
+
+      } else if (type === 'QR') {
+        status.style.color = '#f59e0b';
+        status.innerText = '2 ADIMLI FAST QR';
+        title.innerText = 'DİNAMİK KAREKOD EKRANDA (180 SN)';
+        amount.innerText = '₺450.00';
+        detail.innerText = 'Mobil Bankacılıktan QR Okutunuz';
+        mode.innerText = 'MOD: TCMB FAST QR (0x40)';
+
+        log('➔ Kasa: PaymentMessage (paymentType: FAST_QR, amount: 450.00)', '#38bdf8');
+        log(' Node ➔ Kasa: CardInfoResult (cardInputType: 8, QR Hazırlandı)', '#fbbf24');
+        log('➔ Kasa ➔ Node: PaymentUpdateMessage (QR Teyit Edildi)', '#38bdf8');
+        setTimeout(() => {
+          status.style.color = '#10b981';
+          status.innerText = 'FAST ONAYLANDI';
+          title.innerText = 'FAST FON TRANSFERİ TAMAMLANDI';
+          detail.innerText = 'Gönderen IBAN: TR33 0006 2000... Alındı';
+          log(' POS ➔ Kasa: SuccessResult (cardInputType: 8, pan: TR330006200000012345678901, APPROVED)', '#34d399');
+          log('💾 SQLite: szQrFastReferenceNo & szQrFastMessageAuthNo kaydedildi.', '#a78bfa');
+        }, 1500);
+
+      } else if (type === 'LOYALTY') {
+        status.style.color = '#7c3aed';
+        status.innerText = 'PUAN KULLANIMI';
+        title.innerText = 'KART TAKILDI - PUAN HARCAMA';
+        amount.innerText = '₺500.00';
+        detail.innerText = 'Kullanılan Puan: ₺75.00 | Kalan Kart Çekimi: ₺425.00';
+        mode.innerText = 'MOD: SADAKAT PUANI (LOYALTY)';
+
+        log('➔ Kasa: PaymentMessage (amount: 500.00, loyalty: 75.00, bankId: 62 Garanti)', '#38bdf8');
+        setTimeout(() => {
+          log(' Node ➔ Kasa: CardInfoResult (loyaltyInfo: [{name: "Bonus", amount: 120.00, partial: true}])', '#fbbf24');
+          log('➔ Kasa ➔ Node: PaymentUpdateMessage (75.00 TL puan onayı + 425.00 TL kart onayı)', '#38bdf8');
+        }, 600);
+        setTimeout(() => {
+          status.style.color = '#10b981';
+          status.innerText = 'PUAN DÜŞÜLDÜ';
+          title.innerText = 'ÖDEME BAŞARILI (PUAN + KART)';
+          detail.innerText = 'Harcanan Puan: ₺75.00 | Çekilen: ₺425.00 | Auth: 554192';
+          log(' POS ➔ Kasa: SuccessResult (authorizatedLoyalty: 75.00, amount: 425.00, APPROVED)', '#34d399');
+          log('💾 SQLite: Puan ve kart çekim tutarı ayrı sütunlarda mühürlendi.', '#a78bfa');
+        }, 1400);
+
+      } else if (type === 'REVERSE') {
+        status.style.color = '#be123c';
+        status.innerText = 'İŞLEM İPTALİ (VOID)';
+        title.innerText = 'KARTSIZ İPTAL TALEBİ İŞLENİYOR';
+        amount.innerText = '₺250.00';
+        detail.innerText = 'Orijinal Trx: TRX_904128 | Kartsız İptal';
+        mode.innerText = 'MOD: REVERSE / VOID (START_WITHOUT_CARD)';
+
+        log('➔ Kasa: ReversePaymentMessage (trxId: "TRX_904128", posId: 101)', '#f43f5e');
+        setTimeout(() => {
+          log('💾 SQLite: Orijinal kayıt bulundu. Banka BKM: 62 Garanti. Kartsız VOID hazırlanıyor.', '#a78bfa');
+          log('➔ Node ➔ POS: Json_Imp_ExecuteTransactionStep (TransType: VOID 0x02, START_WITHOUT_CARD)', '#fbbf24');
+        }, 600);
+        setTimeout(() => {
+          status.style.color = '#10b981';
+          status.innerText = 'İPTAL EDİLDİ';
+          title.innerText = 'İŞLEM BANKA HOSTUNDA İPTAL EDİLDİ';
+          detail.innerText = 'Ters Kayıt: REVERSED | Slip Basılıyor';
+          log(' POS ➔ Kasa: ReversePaymentResult (trxId: "TRX_904128", result: SUCCESS, msg: "İPTAL EDİLDİ")', '#34d399');
+          log('💾 SQLite: Transaction tablosunda statü REVERSED yapıldı.', '#a78bfa');
+        }, 1400);
+
+      } else if (type === 'LOOKUP') {
+        status.style.color = '#ef4444';
+        status.innerText = 'AĞ KOPMASI TESTİ';
+        title.innerText = 'BAĞLANTI KOPTU ➔ LOOKUP ÇALIŞTI';
+        amount.innerText = '₺300.00';
+        detail.innerText = "Son İşlem Durumu POS'tan Sorgulanıyor";
+        mode.innerText = 'MOD: LAST TRANSACTION LOOKUP';
+
+        log('⚠️ HATA: Kasa ile POS arasında socket koptu. İşlem askıda kalabilir!', '#f87171');
+        setTimeout(() => {
+          log('🔄 Sürücü: Json_Imp_LastTransactionLookup çağrısı yapıldı.', '#c084fc');
+          log(' POS Cevabı: 0x00 RESULT_OK (Banka bu işlemi onaylamış)', '#34d399');
+          status.style.color = '#10b981';
+          status.innerText = 'KURTARILDI';
+          title.innerText = 'İŞLEM TEYİT EDİLDİ (MÜKERRER ÖNLENDİ)';
+          detail.innerText = 'Durum: APPROVED olarak kapatıldı';
+          log('💾 SQLite: İşlem kurtarılarak APPROVED yapıldı, çift çekim önlendi.', '#34d399');
+        }, 1200);
+      }
+    }
+  </script>
+
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>© 2026 Violin POS Orkestrasyon Sistemi | Tüm Hakları Saklıdır.</div>
+    <div>Teknik Sunum &amp; Mimari Spesifikasyon Belgesi</div>
+  </footer>
+
+  </div>
+
+</body>
+
+</html>
